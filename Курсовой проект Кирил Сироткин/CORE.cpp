@@ -4,7 +4,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 {
     MainWindow win;
 
-    if (!win.Create(L"Learn to Program Windows", WS_OVERLAPPEDWINDOW))
+    if (!win.Create(L"Ping ponk", WS_OVERLAPPEDWINDOW,NULL,500,500,500,500,NULL,NULL))
     {
         return 0;
     }

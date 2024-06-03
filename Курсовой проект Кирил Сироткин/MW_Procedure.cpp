@@ -75,8 +75,29 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         ballX += ballSpeedX;
         ballY += ballSpeedY;
 
-        // Проверка столкновения с границами окна
+        
         GetClientRect(m_hwnd, &clientRect);
+        if (block_1.left <= ballX - ballRadius && ballX - ballRadius <= block_1.right && (ballY - ballRadius == block_1.bottom || ballY + ballRadius == block_1.top) && block_1_hit == false)
+        {
+                ballSpeedY = -ballSpeedY;
+                block_1_hit = true;
+        }
+        if (block_2.left <= ballX - ballRadius && ballX - ballRadius <= block_2.right && (ballY - ballRadius == block_2.bottom || ballY + ballRadius == block_2.top) && block_2_hit == false)
+        {
+                ballSpeedY = -ballSpeedY;
+                block_2_hit = true;
+        }
+        if (block_3.left <= ballX - ballRadius && ballX - ballRadius <= block_3.right && (ballY - ballRadius == block_3.bottom || ballY + ballRadius == block_3.top) && block_3_hit == false)
+        {
+                ballSpeedY = -ballSpeedY;
+                block_3_hit = true;
+        }
+        if (block_4.left <= ballX - ballRadius && ballX - ballRadius <= block_4.right && (ballY - ballRadius == block_4.bottom || ballY + ballRadius == block_4.top) && block_4_hit == false)
+        {
+                ballSpeedY = -ballSpeedY;
+                block_4_hit = true;
+        }
+        // Проверка столкновения с границами окна
         if (ballX - ballRadius < 0 || ballX + ballRadius > clientRect.right)
         {
             ballSpeedX = -ballSpeedX;
@@ -109,6 +130,23 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         // Рисование шарика
         FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 5));
         FillRect(hdc, &rc_platform, (HBRUSH)(COLOR_WINDOW + 9));
+        if(block_1_hit == false)
+        {
+            FillRect(hdc, &block_1, (HBRUSH)(COLOR_WINDOW + 13));
+        }
+        if (block_2_hit == false)
+        {
+            FillRect(hdc, &block_2, (HBRUSH)(COLOR_WINDOW + 13));
+        }
+        if (block_3_hit == false)
+        {
+            FillRect(hdc, &block_3, (HBRUSH)(COLOR_WINDOW + 13));
+        }
+        if (block_4_hit == false)
+        {
+            FillRect(hdc, &block_4, (HBRUSH)(COLOR_WINDOW + 13));
+        }
+
         Ellipse(hdc, ballX - ballRadius, ballY - ballRadius, ballX + ballRadius, ballY + ballRadius);
         SetWindowText(hwnd_edit, m_reportFileName);
 
